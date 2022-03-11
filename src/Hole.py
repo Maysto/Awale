@@ -2,8 +2,8 @@ class Hole:
     """ Classe qui gere les trous et les graines qui sont dedans """
     def __init__(self, id):
         self._id = id
-        self.redSeeds = 0
-        self.blueSeeds = 0
+        self.redSeeds = 2
+        self.blueSeeds = 2
     
     def _get_redSeeds(self):
         return self.redSeeds
