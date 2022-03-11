@@ -6,4 +6,9 @@ class Game:
         self.board = Board()
         self.player1 = first ## True if it is my turn to play esle turn it to false
     
-    def _playTurn(self, played]):  ## played is what we receive form the other player or from our decision AI ex:(16B)
+    def _playTurn(self, played):  ## played is what we receive form the other player or from our decision AI ex:(16B)
+        hand = self.board[played]._empty()  ## TODO played is like 16B we need to parse to retrieve only the int and the color (seperated)
+        if hand["R"] == 0:
+            self._playeBlueSeeds(hand["B"])
+        else:
+            self._playeRedSeeds(hand["R"])
