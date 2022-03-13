@@ -21,7 +21,10 @@ class Game:
     def _playRedSeeds(self, seeds, holePlayed):
         if (holePlayed % 16 != 0):
             starting = holePlayed
+        else :
+            starting = 0
         for i in range(seeds):
+            print(self.board[starting])
             self.board[starting]._add_redSeed()
             starting = (starting + 1) % 16
         return starting
@@ -29,8 +32,11 @@ class Game:
     def _playBlueSeeds(self, seeds, holePlayed):
         if (holePlayed % 16 != 0):
             starting = holePlayed
+        else :
+            starting = 0
         for i in range(seeds):
-            self.board[starting]._add_blueSeed()
+            
+            self.board[starting ]._add_blueSeed()
             starting = (starting + 2) % 16
         return starting
     
@@ -40,13 +46,16 @@ class Game:
         total = 0
         hole = self.board[start]
         blueSeeds = hole._get_blueSeeds()
-        redSeeds = hole._get_redSeeds() 
+        redSeeds = hole._get_redSeeds()
         while (blueSeeds + redSeeds == 2 or blueSeeds + redSeeds == 3):
+            print(" Je suis dedans")
+            
             total += hole._empty("R") + hole._empty("B")
             start = start - 1
             hole = self.board[start]
             blueSeeds = hole._get_blueSeeds()
             redSeeds = hole._get_redSeeds() 
         else:
+            print ("Total du harvest : "+ str(total))
             return total
 
