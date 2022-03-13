@@ -7,6 +7,9 @@ class Board:
         for i in range(1, 17):
             hole = Hole(i)
             self._holes.append(hole)
+    
+    def __getitem__(self, position):
+        return self._holes[position]
 
     def __repr__(self):
         return str(self._holes)
