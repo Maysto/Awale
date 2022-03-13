@@ -29,7 +29,7 @@ class Game:
             starting = staring + 1
         for i in range(seeds):
             self.board[starting]._add_blueSeed()
-            starting = (starting + 1) % 16
+            starting = (starting + 2) % 16
         return starting
     
     def _harvest(self, start):
