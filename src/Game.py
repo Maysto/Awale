@@ -14,6 +14,7 @@ class Game:
         else:
             harvestStart = self._playeRedSeeds(hand["R"], holePlayed)
             self._harvest(harvestStart)
+        return self.board
     
     def _playeRedSeeds(self, seeds, holePlayed):
         starting = (holePlayed + 1) % 16
