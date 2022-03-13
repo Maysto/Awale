@@ -14,7 +14,7 @@ At the beginning there are 2 seeds of each color per hole
 The game starts with 2+2 seeds in each hole. The object of the game is to capture more seeds than one's opponent. Since there is an even number of seeds, it is possible for the game to end in a draw, where each player has captured 32.
 
 -- Sowing
-Players take turns moving the seeds. On a turn, a player chooses one of the height holes under their control. The player removes seeds from that hole (see below for the color management), and distributes them, dropping one in holes clockwise (i.e. in non decreasing order) from this hole, in a process called sowing. 
+Players take turns moving the seeds. On a turn, a player chooses one of the eight holes under their control. The player removes seeds from that hole (see below for the color management), and distributes them, dropping one in holes clockwise (i.e. in non decreasing order) from this hole, in a process called sowing. 
 Moves are made according to colors. First a color is designed and all the seeds of this color are played, 
 If the seeds are red, then they are distributed in each hole. If the seeds are blue, then they are distributed only in the opponent's holes.
 
