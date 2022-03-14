@@ -5,8 +5,10 @@ class Game:
     def __init__(self, isStarting):
         self.board = Board()
         self.player1 = isStarting                                              ## True if it is my turn to play esle turn it to false
+        self.status = "Initialised"                                           
     
     def _playTurn(self, holePlayed, playedColor):                              ## played is what we receive form the other player ex:(16B)
+        self.status = "Playing"
         print("Debut du tour : " + str(self.board))
         hand = self.board[holePlayed - 1]._empty(playedColor)
         if playedColor == "B":

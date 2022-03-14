@@ -1,12 +1,19 @@
 from Game import Game
 
-awale = Game(True)
+def isGoodEntry(entry):
+    if (isStarting == "premier" or isStarting == "Premier" or isStarting == "deuxieme" or isStarting == "Deuxieme"):
+        return True
+    else:
+        print("Entree non valide.")
+        return False
 
+isStarting = input("Voulez commencer ou jouer en deuxieme ? ")
+while (isGoodEntry(isStarting) == False):
+    isStarting = input("Veuillez entrer un choix valide [premier] | [deuxieme] : \n")
 
-while (input("Voulez vous rejouez") == "oui" ):
+awale = Game(isStarting)
+
+while ( awale.status != "Finished" ):
     turn = int(input('Tu joues quel trou batard : '))
     color = input('et quelle couleur sale con : ')
     awale._playTurn(turn, color)
-
-
-
