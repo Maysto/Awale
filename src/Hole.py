@@ -17,7 +17,13 @@ class Hole:
     def _add_blueSeed(self):
         self.blueSeeds = self.blueSeeds + 1
     
-    def _empty(self, color):
+    def _empty(self):
+        res = self.blueSeeds + self.redSeeds
+        self.blueSeeds = 0
+        self.redSeeds = 0
+        return res
+    
+    def _takeSeeds(self, color):
         if (color == "R"):
             res = { "R": self.redSeeds }
             self.redSeeds = 0
@@ -27,7 +33,7 @@ class Hole:
             self.blueSeeds = 0
             return res
         else:
-            return "Coup non valide il n'existe pas de graines de cette couleur"
+            print("Coup non valable, cette couleur de graine n'existe pas")
     
     def __repr__(self):
         return "Trou: " + str(self._id) + ", graines bleues: " + str(self.blueSeeds) + ", graines rouges: " + str(self.redSeeds)

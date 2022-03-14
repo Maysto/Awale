@@ -5,24 +5,40 @@ class Game:
     """ Classe qui gere les evenments de la partie, fonction pour jouer, etc.... TODO faire la fonction pour jouer un tour de jeu  """
     def __init__(self, isStarting):
         self.board = Board()
-        self.player1 = isStarting                                              ## True if it is my turn to play esle turn it to false
-        self.status = "Initialised"                                           
+        self.isAIStarting = isStarting                                              ## True if it is my turn to play esle turn it to false
+        self.status = "Initialised"
+        self.playerBank = 0
+        self.botBank = 0                                              
     
-    def _playTurn(self, holePlayed, playedColor):                              ## played is what we receive form the other player ex:(16B)
+    def _playTurn(self, holePlayed, playedColor, turnId):                              ## played is what we receive form the other player ex:(16B)
         self.status = "Playing"
-        print("Debut du tour : " + str(self.board))
         
-        hand = self.board[holePlayed - 1]._empty(playedColor)
+        hand = self.board[holePlayed - 1]._takeSeeds(playedColor)
+        if (type(hand) is str):
+            print(hand)
+            return
         if playedColor == "B":
             harvestStart = self._playBlueSeeds(hand["B"], holePlayed)
-            self._harvest(harvestStart)
+            harvested = self._harvest(harvestStart)
+            if (self.isAIStarting and turnId % 2 != 0):
+                self.botBank += harvested
+            elif (not self.isAIStarting and turn % 2 == 0):
+                self.botBank += harvested
+            else:
+                self.playerBank += harvested
+
         else:
             harvestStart = self._playRedSeeds(hand["R"], holePlayed)
-            self._harvest(harvestStart)
+            harvested = self._harvest(harvestStart)
+            if (self.isAIStarting and turnId % 2 != 0):
+                self.botBank += harvested
+            elif (not self.isAIStarting and turn % 2 == 0):
+                self.botBank += harvested
+            else:
+                self.playerBank += harvested
         print("Fin du tour : " + str(self.board))
         limit = 0
         limit = self._checkend(limit)
-        print("C est la limite"+str(limit))
         if (limit < 8):
             self.status = "Finished"
         return self.board
@@ -53,26 +69,17 @@ class Game:
         if (start < 0):
             start = 15
         total = 0
-        hole = self.board[start]
+        hole = self.board[start - 1]
         blueSeeds = hole._get_blueSeeds()
         redSeeds = hole._get_redSeeds()
-        while (blueSeeds + redSeeds == 2 or blueSeeds + redSeeds == 3):
-            print(" Je suis dedans")
-            
+        if (blueSeeds + redSeeds == 2 or blueSeeds + redSeeds == 3):
             total += hole._empty()
-            start = start - 1
-            hole = self.board[start]
-            blueSeeds = hole._get_blueSeeds()
-            redSeeds = hole._get_redSeeds() 
-        else:
-            print ("Total du harvest : "+ str(total))
-            return total
+            total += self._harvest(start - 1)
+        return total
 
     def _checkend(self,limit):
         
         for i in range(0, 16):
-            print(self.board[i]._get_redSeeds())
-            print(self.board[i]._get_blueSeeds())
             limit += self.board[i]._get_redSeeds()
             limit += self.board[i]._get_blueSeeds()
 

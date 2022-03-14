@@ -12,8 +12,10 @@ while (isGoodEntry(isStarting) == False):
     isStarting = input("Veuillez entrer un choix valide [premier] | [deuxieme] : \n")
 
 awale = Game(isStarting)
+turnId = 1
 
 while ( awale.status != "Finished" ):
     turn = int(input('Tu joues quel trou batard : '))
     color = input('et quelle couleur sale con : ')
-    awale._playTurn(turn, color)
+    awale._playTurn(turn, color, turnId)
+    turnId += 1
