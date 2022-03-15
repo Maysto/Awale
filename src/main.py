@@ -1,6 +1,7 @@
 from Game import Game
 
 from colorama import init, Fore, Back, Style
+from Bcolors import bcolors
 
 init()
 
@@ -11,9 +12,9 @@ def isGoodEntry(entry):
         print(Fore.RED+"Entree non valide.")
         return False
 
-isStarting = input(Fore.RED+"Voulez commencer ou jouer en deuxieme ? ")
+isStarting = input(bcolors.OKGREEN+"Voulez commencer ou jouer en deuxieme ? ")
 while (isGoodEntry(isStarting) == False):
-    isStarting = print(Fore.RED+"Veuillez entrer un choix valide [premier] | [deuxieme] : \n")
+    isStarting = print(bcolors.OKGREEN+"Veuillez entrer un choix valide [premier] | [deuxieme] : \n")
     
 
 awale = Game(isStarting)
