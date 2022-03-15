@@ -15,7 +15,6 @@ awale = Game(isStarting)
 turnId = 1
 
 while ( awale.status != "Finished" ):
-    turn = int(input('Tu joues quel trou batard : '))
-    color = input('et quelle couleur sale con : ')
-    awale._playTurn(turn, color, turnId)
+    turn = input('Quel est votre coup ? ')
+    awale._playTurn(turn, turnId)
     turnId += 1

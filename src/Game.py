@@ -1,5 +1,11 @@
 from Board import Board
 
+def parseTurnInput(s):
+    array = list(s)
+    color = array[-1]
+    arrayHole = array[:-1]
+    hole = int(''.join(arrayHole))
+    return hole, color
 
 class Game:
     """ Classe qui gere les evenments de la partie, fonction pour jouer, etc.... TODO faire la fonction pour jouer un tour de jeu  """
@@ -10,9 +16,10 @@ class Game:
         self.playerBank = 0
         self.botBank = 0                                              
     
-    def _playTurn(self, holePlayed, playedColor, turnId):                              ## played is what we receive form the other player ex:(16B)
+    def _playTurn(self, turnPlayed, turnId):                              ## played is what we receive form the other player ex:(16B)
         self.status = "Playing"
-        
+        holePlayed, playedColor = parseTurnInput(turnPlayed)
+        print(holePlayed, playedColor)
         hand = self.board[holePlayed - 1]._takeSeeds(playedColor)
         if (type(hand) is str):
             print(hand)
