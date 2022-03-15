@@ -3,13 +3,12 @@ from Agent import Agent
 from Bcolors import bcolors
 
 awale = Game()
-agent = Agent()
 turnId = 1
 canContinue = True
 
 while ( awale.status != "Finished" ):
     if (canContinue and turnId % 2 == 0):
-        minmaxTurn = agent._getTurn(awale.board, "player2")
+        minmaxTurn = getTurn(awale, "player2", turnId)
         canContinue = awale._playTurn(minmaxTurn, turnId, "player2")
         if (canContinue):
             turnId += 1
