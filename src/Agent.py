@@ -20,6 +20,6 @@ class Agent:
 
             if (depth % 2 == 0):
                 for (i in range(0, len(board), 2)):
-                    board[i]
+                    
             else:        
                 for (i in range(1, len(board), 2)):
