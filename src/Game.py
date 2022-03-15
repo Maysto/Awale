@@ -8,7 +8,7 @@ def parseTurnInput(s):
     return hole, color
 
 class Game:
-    """ Classe qui gere les evenments de la partie, fonction pour jouer, etc.... TODO faire la fonction pour jouer un tour de jeu  """
+    """ Classe qui gere les evenments de la partie, fonction pour jouer, etc..."""
     def __init__(self):
         self.board = Board()                                           
         self.status = "Initialised"

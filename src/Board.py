@@ -1,7 +1,7 @@
 from Hole import Hole
 
 class Board:
-    """ Classe qui gere le plateau de jeu, TODO fonctions pour distribuer les garines dans les trous """
+    """ Classe qui gere le plateau de jeu"""
     def __init__(self):
         self._holes = []
         for i in range(1, 17):
