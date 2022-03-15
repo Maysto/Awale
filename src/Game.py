@@ -1,5 +1,6 @@
 from Board import Board
 from colorama import init, Fore, Back, Style
+from Bcolors import bcolors
 def parseTurnInput(s):
     array = list(s)
     color = array[-1]
@@ -43,8 +44,8 @@ class Game:
                 self.botBank += harvested
             else:
                 self.playerBank += harvested
-        print(Fore.MAGENTA+"Fin du tour : " + str(self.board))
-        print("\n"+Fore.MAGENTA+"Stocks des joueurs : " + Fore.BLUE+ "\nBot : " + str(self.botBank) + Fore.RED+ "\nJoueur : " + str(self.playerBank))
+        print(bcolors.OKMAGENTA +"Fin du tour : " + str(self.board))
+        print("\n"+bcolors.OKMAGENTA +"Stocks des joueurs : " + bcolors.OKBLUE + "\nBot : " + str(self.botBank) + bcolors.OKRED+ "\nJoueur : " + str(self.playerBank))
         limit = 0
         limit = self._checkend(limit)
         if (limit < 8):

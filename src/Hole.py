@@ -1,4 +1,5 @@
 from colorama import init, Fore, Back, Style
+from Bcolors import bcolors
 
 class Hole:
     """ Classe qui gere les trous et les graines qui sont dedans """
@@ -38,4 +39,4 @@ class Hole:
             print("Coup non valable, cette couleur de graine n'existe pas")
     
     def __repr__(self):
-        return "\n" + Fore.GREEN + "Trou: " + str(self._id) +Fore.BLUE+ ", B: " + str(self.blueSeeds) +Fore.RED+ ", R: " + str(self.redSeeds)
+        return "\n" + bcolors.OKGREEN + "Trou: " + str(self._id) +bcolors.OKBLUE+ ", B: " + str(self.blueSeeds) +bcolors.OKRED+ ", R: " + str(self.redSeeds)

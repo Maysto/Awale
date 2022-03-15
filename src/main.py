@@ -9,7 +9,7 @@ def isGoodEntry(entry):
     if (isStarting == "premier" or isStarting == "Premier" or isStarting == "deuxieme" or isStarting == "Deuxieme"):
         return True
     else:
-        print(Fore.RED+"Entree non valide.")
+        print(bcolors.OKRED+"Entree non valide.")
         return False
 
 isStarting = input(bcolors.OKGREEN+"Voulez commencer ou jouer en deuxieme ? ")
@@ -21,6 +21,6 @@ awale = Game(isStarting)
 turnId = 1
 
 while ( awale.status != "Finished" ):
-    turn = input(Fore.GREEN+'Quel est votre coup ? ')
+    turn = input(bcolors.OKGREEN+'Quel est votre coup ? ')
     awale._playTurn(turn, turnId)
     turnId += 1
