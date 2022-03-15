@@ -44,6 +44,7 @@ class Game:
             else:
                 self.playerBank += harvested
         print("Fin du tour : " + str(self.board))
+        print("Stocks des joueurs : " + "\nBot : " + str(self.botBank) + "\nJoueur : " + str(self.playerBank))
         limit = 0
         limit = self._checkend(limit)
         if (limit < 8):
