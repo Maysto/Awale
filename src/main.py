@@ -1,26 +1,29 @@
 from Game import Game
 
-from colorama import init, Fore, Back, Style
 from Bcolors import bcolors
 
-init()
-
-def isGoodEntry(entry):
-    if (isStarting == "premier" or isStarting == "Premier" or isStarting == "deuxieme" or isStarting == "Deuxieme"):
-        return True
-    else:
-        print(bcolors.OKRED+"Entree non valide.")
-        return False
-
-isStarting = input(bcolors.OKGREEN+"Voulez commencer ou jouer en deuxieme ? ")
-while (isGoodEntry(isStarting) == False):
-    isStarting = print(bcolors.OKGREEN+"Veuillez entrer un choix valide [premier] | [deuxieme] : \n")
-    
-
-awale = Game(isStarting)
+awale = Game()
 turnId = 1
+canContinue = True
 
 while ( awale.status != "Finished" ):
-    turn = input(bcolors.OKGREEN+'Quel est votre coup ? ')
-    awale._playTurn(turn, turnId)
-    turnId += 1
+    if (canContinue and turnId % 2 == 0):
+        minmaxTurn = aiAgent._getTurn(awale.board)
+        canContinue = awale._playTurn(minmaxTurn, turnId, "player2")
+        if (canContinue):
+            turnId += 1
+    elif (canContinue and turnId % 2 != 0):
+        turn = input(bcolors.OKGREEN+'JOUEUR 1 : Quel est votre coup ? ')
+        canContinue = awale._playTurn(turn, turnId, "player1")
+        if (canContinue):
+            turnId += 1
+    elif (not canContinue and turnId % 2 != 0):
+        turn = input(bcolors.OKGREEN+'JOUEUR 1 : Quel est votre coup ? ')
+        canContinue = awale._playTurn(turn, turnId, "player1")
+        if (canContinue):
+            turnId += 1
+    elif (not canContinue and turnId % 2 == 0):
+        minmaxTurn = aiAgent._getTurn(awale.board)
+        canContinue = awale._playTurn(minmaxTurn, turnId, "player2")
+        if (canContinue):
+            turnId += 1

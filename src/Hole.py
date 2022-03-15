@@ -1,4 +1,3 @@
-from colorama import init, Fore, Back, Style
 from Bcolors import bcolors
 
 class Hole:

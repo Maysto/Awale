@@ -1,5 +1,4 @@
 from Board import Board
-from colorama import init, Fore, Back, Style
 from Bcolors import bcolors
 def parseTurnInput(s):
     array = list(s)
@@ -10,42 +9,45 @@ def parseTurnInput(s):
 
 class Game:
     """ Classe qui gere les evenments de la partie, fonction pour jouer, etc.... TODO faire la fonction pour jouer un tour de jeu  """
-    def __init__(self, isStarting):
-        self.board = Board()
-        self.isAIStarting = isStarting                                              ## True if it is my turn to play esle turn it to false
+    def __init__(self):
+        self.board = Board()                                           
         self.status = "Initialised"
-        self.playerBank = 0
-        self.botBank = 0                                              
+        self.player1Bank = 0
+        self.player2Bank = 0                                              
     
-    def _playTurn(self, turnPlayed, turnId):                              ## played is what we receive form the other player ex:(16B)
+    def _playTurn(self, turnPlayed, turnId, whosPlaying):                              ## played is what we receive form the other player ex:(16B)
         self.status = "Playing"
         holePlayed, playedColor = parseTurnInput(turnPlayed)
-        print(holePlayed, playedColor)
-        hand = self.board[holePlayed - 1]._takeSeeds(playedColor)
+        if ((whosPlaying == "player1" and turnId % 2 != 0 and holePlayed % 2 != 0) or (whosPlaying == "player2" and turnId % 2 == 0 and holePlayed % 2 == 0)):
+            hand = self.board[holePlayed - 1]._takeSeeds(playedColor)
+        else:
+            print(bcolors.WARNING + "Tu ne peux pas jouer ce coup, le joueur 1 possede les trous impairs")
+            print(self.board)
+            return False
         if (type(hand) is str):
             print(hand)
             return
         if playedColor == "B":
             harvestStart = self._playBlueSeeds(hand["B"], holePlayed)
             harvested = self._harvest(harvestStart)
-            if (self.isAIStarting and turnId % 2 != 0):
-                self.botBank += harvested
-            elif (not self.isAIStarting and turnId % 2 == 0):
-                self.botBank += harvested
+            if (whosPlaying == "player2" and turnId % 2 != 0):
+                self.player2Bank += harvested
+            elif (whosPlaying == "player2" and turnId % 2 == 0):
+                self.player2Bank += harvested
             else:
-                self.playerBank += harvested
+                self.player1Bank += harvested
 
         else:
             harvestStart = self._playRedSeeds(hand["R"], holePlayed)
             harvested = self._harvest(harvestStart)
-            if (self.isAIStarting and turnId % 2 != 0):
-                self.botBank += harvested
-            elif (not self.isAIStarting and turnId % 2 == 0):
-                self.botBank += harvested
+            if (whosPlaying == "player2" and turnId % 2 != 0):
+                self.player2Bank += harvested
+            elif (whosPlaying == "player2" and turnId % 2 == 0):
+                self.player2Bank += harvested
             else:
-                self.playerBank += harvested
+                self.player1Bank += harvested
         print(bcolors.OKMAGENTA +"Fin du tour : " + str(self.board))
-        print("\n"+bcolors.OKMAGENTA +"Stocks des joueurs : " + bcolors.OKBLUE + "\nBot : " + str(self.botBank) + bcolors.OKRED+ "\nJoueur : " + str(self.playerBank))
+        print("\n"+bcolors.OKMAGENTA +"Stocks des joueurs : " + bcolors.OKBLUE + "\nJoueur 2 : " + str(self.player2Bank) + bcolors.OKRED+ "\nJoueur 1 : " + str(self.player1Bank))
         limit = 0
         limit = self._checkend(limit)
         if (limit < 8):
