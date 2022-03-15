@@ -1,5 +1,5 @@
 from Board import Board
-
+from colorama import init, Fore, Back, Style
 def parseTurnInput(s):
     array = list(s)
     color = array[-1]
@@ -29,7 +29,7 @@ class Game:
             harvested = self._harvest(harvestStart)
             if (self.isAIStarting and turnId % 2 != 0):
                 self.botBank += harvested
-            elif (not self.isAIStarting and turn % 2 == 0):
+            elif (not self.isAIStarting and turnId % 2 == 0):
                 self.botBank += harvested
             else:
                 self.playerBank += harvested
@@ -39,12 +39,12 @@ class Game:
             harvested = self._harvest(harvestStart)
             if (self.isAIStarting and turnId % 2 != 0):
                 self.botBank += harvested
-            elif (not self.isAIStarting and turn % 2 == 0):
+            elif (not self.isAIStarting and turnId % 2 == 0):
                 self.botBank += harvested
             else:
                 self.playerBank += harvested
-        print("Fin du tour : " + str(self.board))
-        print("Stocks des joueurs : " + "\nBot : " + str(self.botBank) + "\nJoueur : " + str(self.playerBank))
+        print(Fore.MAGENTA+"Fin du tour : " + str(self.board))
+        print("\n"+Fore.MAGENTA+"Stocks des joueurs : " + Fore.BLUE+ "\nBot : " + str(self.botBank) + Fore.RED+ "\nJoueur : " + str(self.playerBank))
         limit = 0
         limit = self._checkend(limit)
         if (limit < 8):

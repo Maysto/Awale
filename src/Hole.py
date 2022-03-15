@@ -1,3 +1,5 @@
+from colorama import init, Fore, Back, Style
+
 class Hole:
     """ Classe qui gere les trous et les graines qui sont dedans """
     def __init__(self, id):
@@ -36,4 +38,4 @@ class Hole:
             print("Coup non valable, cette couleur de graine n'existe pas")
     
     def __repr__(self):
-        return "Trou: " + str(self._id) + ", graines bleues: " + str(self.blueSeeds) + ", graines rouges: " + str(self.redSeeds)
+        return "\n" + Fore.GREEN + "Trou: " + str(self._id) +Fore.BLUE+ ", B: " + str(self.blueSeeds) +Fore.RED+ ", R: " + str(self.redSeeds)
