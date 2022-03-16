@@ -12,8 +12,6 @@ def parsed(turn):
     return parsedTurn
 
 def evaluate(board, playing) :
-    if board.player1Bank == board.player2Bank :
-        return 0
     if playing == "player1":
         mySeeds = 0
         opponentSeeds = 0
@@ -22,7 +20,9 @@ def evaluate(board, playing) :
                 mySeeds += hole._get_blueSeeds() + hole._get_redSeeds()
             else :
                 opponentSeeds += hole._get_blueSeeds() + hole._get_redSeeds()
-        if board.player1Bank > board.player2Bank and mySeeds > opponentSeeds :
+        if board.player1Bank == board.player2Bank or mySeeds == opponentSeeds:
+            return 0
+        elif board.player1Bank > board.player2Bank and mySeeds > opponentSeeds :
             return 2
         elif board.player1Bank > board.player2Bank or mySeeds > opponentSeeds :
             return 1
@@ -36,7 +36,9 @@ def evaluate(board, playing) :
                 mySeeds += hole._get_blueSeeds() + hole._get_redSeeds()
             else :
                 opponentSeeds += hole._get_blueSeeds() + hole._get_redSeeds()
-        if board.player2Bank > board.player1Bank and mySeeds > opponentSeeds :
+        if board.player1Bank == board.player2Bank or mySeeds == opponentSeeds:
+            return 0
+        elif board.player2Bank > board.player1Bank and mySeeds > opponentSeeds :
             return 2
         elif board.player2Bank > board.player1Bank or mySeeds > opponentSeeds :
             return 1
