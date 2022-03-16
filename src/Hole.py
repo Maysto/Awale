@@ -10,6 +10,9 @@ class Hole:
     def _get_redSeeds(self):
         return self.redSeeds
     
+    def _get_Id(self):
+        return self._id
+    
     def _get_blueSeeds(self):
         return self.blueSeeds
     
@@ -35,7 +38,7 @@ class Hole:
             self.blueSeeds = 0
             return res
         else:
-            print("Coup non valable, cette couleur de graine n'existe pas")
+            return "Coup non valable, cette couleur de graine n'existe pas"
     
     def __repr__(self):
         return "\n" + bcolors.OKGREEN + "Trou: " + str(self._id) +bcolors.OKBLUE+ ", B: " + str(self.blueSeeds) +bcolors.OKRED+ ", R: " + str(self.redSeeds)

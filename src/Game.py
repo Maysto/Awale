@@ -20,6 +20,12 @@ class Game:
         holePlayed, playedColor = parseTurnInput(turnPlayed)
         if ((whosPlaying == "player1" and turnId % 2 != 0 and holePlayed % 2 != 0) or (whosPlaying == "player2" and turnId % 2 == 0 and holePlayed % 2 == 0)):
             hand = self.board[holePlayed - 1]._takeSeeds(playedColor)
+            if (type(hand) is str):
+                print(hand)
+                return False
+            elif (hand[playedColor] == 0) :
+                print(bcolors.WARNING + "Tu ne peux pas jouer ce coup, le trou n'a plus de graines de cette couleur")
+                return False
         else:
             print(bcolors.WARNING + "Tu ne peux pas jouer ce coup, le joueur 1 possede les trous impairs")
             
