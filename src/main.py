@@ -1,15 +1,16 @@
 from Game import Game
 from Agent import getTurn
 from Bcolors import bcolors
+import copy
 
 awale = Game()
 turnId = 1
 canContinue = True
 
 while ( awale.status != "Finished" ):
+    botBoard = copy.deepcopy(awale)
     if (canContinue and turnId % 2 == 0):
-        
-        minmaxTurn = getTurn(awale, "player2", turnId)
+        minmaxTurn = getTurn(botBoard, "player2", turnId)
         print("L'ordinateur a joué : "+minmaxTurn)
         canContinue = awale._playTurn(minmaxTurn, turnId, "player2")
         print(bcolors.OKMAGENTA +"Fin du tour : " + str(awale.board))
@@ -31,7 +32,7 @@ while ( awale.status != "Finished" ):
         if (canContinue):
             turnId += 1
     elif (not canContinue and turnId % 2 == 0):
-        minmaxTurn = getTurn(awale, "player2", turnId)
+        minmaxTurn = getTurn(botBoard, "player2", turnId)
         print("L'ordinateur a joué : "+minmaxTurn)
         canContinue = awale._playTurn(minmaxTurn, turnId, "player2")
         print(bcolors.OKMAGENTA +"Fin du tour : " + str(awale.board))

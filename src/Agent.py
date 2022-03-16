@@ -32,10 +32,12 @@ def defaultMove(playing):
 
 def minimax(startingBoard, depth, isMax, turnId, playing) :
     score = evaluate(startingBoard, playing)
-    if depth > 10:
+    if depth > 3:
         return score
-    
-    board = startingBoard
+    board = Game()
+    board.board = startingBoard.board
+    board.player1Bank = startingBoard.player1Bank
+    board.player2Bank = startingBoard.player2Bank
     
     if (isMax) :    
         best = -1000
@@ -48,18 +50,22 @@ def minimax(startingBoard, depth, isMax, turnId, playing) :
  
                     best = max( best, minimax(board,
                                               depth + 1,
-                                              not isMax, turnId, playing) )
+                                              not isMax, turnId + 1, "player2") )
  
-                    board = startingBoard
+                    board.board = startingBoard.board
+                    board.player1Bank = startingBoard.player1Bank
+                    board.player2Bank = startingBoard.player2Bank
                 if (board.board[i]._get_blueSeeds() > 0) :
                     move  = str(i) + "B"
                     board._playTurn(parsed(move), turnId, playing)
  
                     best = max( best, minimax(board,
                                               depth + 1,
-                                              not isMax, turnId, playing) )
+                                              not isMax, turnId + 1, "player2") )
  
-                    board = startingBoard
+                    board.board = startingBoard.board
+                    board.player1Bank = startingBoard.player1Bank
+                    board.player2Bank = startingBoard.player2Bank
             return best
         elif playing == "player2" :
             for i in range(1, 15, 2) :
@@ -69,18 +75,22 @@ def minimax(startingBoard, depth, isMax, turnId, playing) :
  
                     best = max( best, minimax(board,
                                               depth + 1,
-                                              not isMax, turnId, playing) )
+                                              not isMax, turnId + 1, "player1") )
  
-                    board = startingBoard
+                    board.board = startingBoard.board
+                    board.player1Bank = startingBoard.player1Bank
+                    board.player2Bank = startingBoard.player2Bank
                 if (board.board[i]._get_blueSeeds() > 0) :
                     move  = str(i) + "B"
                     board._playTurn(parsed(move), turnId, playing)
  
                     best = max(best, minimax(board,
                                               depth + 1,
-                                              not isMax, turnId, playing))
+                                              not isMax, turnId + 1, "player1"))
  
-                    board = startingBoard
+                    board.board = startingBoard.board
+                    board.player1Bank = startingBoard.player1Bank
+                    board.player2Bank = startingBoard.player2Bank
             return best
     else :
         best = 1000
@@ -89,47 +99,62 @@ def minimax(startingBoard, depth, isMax, turnId, playing) :
                 if (board.board[i]._get_blueSeeds() > 0) :
                     move = str(i) + "B"
                     board._playTurn(parsed(move), turnId, playing)
-                    best = min(best, minimax(board, depth + 1, not isMax, turnId, playing))
-                    board = startingBoard
+                    best = min(best, minimax(board, depth + 1, not isMax, turnId + 1, "player2"))
+                    board.board = startingBoard.board
+                    board.player1Bank = startingBoard.player1Bank
+                    board.player2Bank = startingBoard.player2Bank
                 if (board.board[i]._get_redSeeds() > 0):
                     move = str(i) + "R"
                     board._playTurn(parsed(move), turnId, playing)
-                    best = min(best, minimax(board, depth + 1, not isMax, turnId, playing))
-                    board = startingBoard
+                    best = min(best, minimax(board, depth + 1, not isMax, turnId + 1, "player2"))
+                    board.board = startingBoard.board
+                    board.player1Bank = startingBoard.player1Bank
+                    board.player2Bank = startingBoard.player2Bank
             return best
         elif playing == "player2" :
             for i in range(1, 15, 2) :        
                 if (board.board[i]._get_blueSeeds() > 0) :
                     move = str(i) + "B"
                     board._playTurn(parsed(move), turnId, playing)
-                    best = min(best, minimax(board, depth + 1, not isMax, turnId, playing))
-                    board = startingBoard
+                    best = min(best, minimax(board, depth + 1, not isMax, turnId + 1, "player1"))
+                    board.board = startingBoard.board
+                    board.player1Bank = startingBoard.player1Bank
+                    board.player2Bank = startingBoard.player2Bank
                 if (board.board[i]._get_redSeeds() > 0):
                     move = str(i) + "R"
                     board._playTurn(parsed(move), turnId, playing)
-                    best = min(best, minimax(board, depth + 1, not isMax, turnId, playing))
-                    board = startingBoard
+                    best = min(best, minimax(board, depth + 1, not isMax, turnId + 1, "player1"))
+                    board.board = startingBoard.board
+                    board.player1Bank = startingBoard.player1Bank
+                    board.player2Bank = startingBoard.player2Bank
             return best
 
 def getTurn(startingBoard, playing, turnId):
     bestVal = -1000
     bestMove = defaultMove(playing)
-    board = startingBoard
+    board = Game()
+    board.board = startingBoard.board
+    board.player1Bank = startingBoard.player1Bank
+    board.player2Bank = startingBoard.player2Bank
     if playing == "player1":
         for i in range(0, 14, 2) :    
             if (board.board[i]._get_blueSeeds() > 0) :
                 move = str(i) + "B"
                 board._playTurn(parsed(move), turnId, playing)
+                board.board = startingBoard.board
+                board.player1Bank = startingBoard.player1Bank
+                board.player2Bank = startingBoard.player2Bank
                 moveVal = minimax(board, 0, False, turnId, playing)
-                board = startingBoard
                 if (moveVal > bestVal) :               
                     bestMove = move
                     bestVal = moveVal
             if (board.board[i]._get_redSeeds() > 0):
                 move = str(i) + "R"
                 board._playTurn(parsed(move), turnId, playing)
+                board.board = startingBoard.board
+                board.player1Bank = startingBoard.player1Bank
+                board.player2Bank = startingBoard.player2Bank
                 moveVal = minimax(board, 0, False, turnId, playing)
-                board = startingBoard
                 if (moveVal > bestVal) :               
                     bestMove = move
                     bestVal = moveVal
@@ -139,16 +164,20 @@ def getTurn(startingBoard, playing, turnId):
             if (board.board[i]._get_blueSeeds() > 0) :
                 move = str(i) + "B"
                 board._playTurn(parsed(move), turnId, playing)
+                board.board = startingBoard.board
+                board.player1Bank = startingBoard.player1Bank
+                board.player2Bank = startingBoard.player2Bank
                 moveVal = minimax(board, 0, False, turnId, playing)
-                board = startingBoard
                 if (moveVal > bestVal) :               
                     bestMove = move
                     bestVal = moveVal
             if (board.board[i]._get_redSeeds() > 0):
                 move = str(i) + "R"
                 board._playTurn(parsed(move), turnId, playing)
+                board.board = startingBoard.board
+                board.player1Bank = startingBoard.player1Bank
+                board.player2Bank = startingBoard.player2Bank
                 moveVal = minimax(board, 0, False, turnId, playing)
-                board = startingBoard
                 if (moveVal > bestVal) :               
                     bestMove = move
                     bestVal = moveVal
