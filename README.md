@@ -30,3 +30,13 @@ The game stops when there is strictly less than 8 seeds on the board. In this ca
 
 -- Winning
 The game is over when one player has captured 33 or more seeds, or each player has taken 32 seeds (draw), or there is only strictly less than 8 seeds that remain. The winner is the player who has more seeds than his opponent.
+
+# How to launch project
+First clone the project on you computer
+```
+python3 .\src\main.py
+```
+The programe ask you if you want to start the game if you say yes the bot will play as player 2 else the bot will play as player 1.
+
+our eval function check if the bank of your agent is more full than the oponent, and if our agent holes avec more seeds than the oponent if both are satisfied it return +2 score
+if only one is satisfied it return +1 if none is satisfied it return -1 if it's perfect equality it return 0
