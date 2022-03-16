@@ -32,7 +32,7 @@ def defaultMove(playing):
 
 def minimax(startingBoard, depth, isMax, turnId, playing) :
     score = evaluate(startingBoard, playing)
-    if depth > 3:
+    if depth > 5:
         return score
     board = Game()
     board.board = startingBoard.board

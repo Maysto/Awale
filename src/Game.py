@@ -22,8 +22,7 @@ class Game:
             hand = self.board[holePlayed - 1]._takeSeeds(playedColor)
         else:
             print(bcolors.WARNING + "Tu ne peux pas jouer ce coup, le joueur 1 possede les trous impairs")
-            print(turnPlayed)
-            print(self.board)
+            
             return False
        
         if playedColor == "B":
