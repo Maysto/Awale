@@ -24,9 +24,7 @@ class Game:
             print(bcolors.WARNING + "Tu ne peux pas jouer ce coup, le joueur 1 possede les trous impairs")
             print(self.board)
             return False
-        if (type(hand) is str):
-            print(hand)
-            return
+       
         if playedColor == "B":
             harvestStart = self._playBlueSeeds(hand["B"], holePlayed)
             harvested = self._harvest(harvestStart)
@@ -46,8 +44,7 @@ class Game:
                 self.player2Bank += harvested
             else:
                 self.player1Bank += harvested
-        print(bcolors.OKMAGENTA +"Fin du tour : " + str(self.board))
-        print("\n"+bcolors.OKMAGENTA +"Stocks des joueurs : " + bcolors.OKBLUE + "\nJoueur 2 : " + str(self.player2Bank) + bcolors.OKRED+ "\nJoueur 1 : " + str(self.player1Bank))
+        
         limit = 0
         limit = self._checkend(limit)
         if (limit < 8):
@@ -60,7 +57,7 @@ class Game:
         else :
             starting = 0
         for i in range(seeds):
-            print(self.board[starting])
+           
             self.board[starting]._add_redSeed()
             starting = (starting + 1) % 16
         return starting
