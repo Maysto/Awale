@@ -53,7 +53,7 @@ class Game:
         
         limit = 0
         limit = self._checkend(limit)
-        if (limit < 8):
+        if (limit < 8 or self.player1Bank > 32 or self.player2Bank > 32):
             self.status = "Finished"
         return self.board
     

@@ -3,6 +3,10 @@ import copy
 
 def evaluate(board, playing) :
     if playing == "player1":
+ 
+      
+
+      
         if board.player1Bank >= 33:
             return 100
         elif board.player2Bank >= 33:
@@ -31,7 +35,7 @@ def evaluate(board, playing) :
 
 
 def minimax(startingBoard, depth, isMax, turnId, playing) :
-    score = evaluate(startingBoard, playing)
+    score = evaluate(startingBoard,playing)
     board = copy.copy(startingBoard)
 
     if (score >= 50 or score == -100):
@@ -45,7 +49,9 @@ def minimax(startingBoard, depth, isMax, turnId, playing) :
                 if (board.board[i]._get_redSeeds() != 0) :
                     move  = str(i+1) + "R"
                     isValid = board._playTurn(move, turnId, playing)
- 
+                    if not isValid:
+                        return -1000
+
                     best = max( best, minimax(board,
                                               depth + 1,
                                               not isMax, turnId + 1, "player2"))
@@ -53,7 +59,9 @@ def minimax(startingBoard, depth, isMax, turnId, playing) :
                     board = copy.copy(startingBoard)
                 if (board.board[i]._get_blueSeeds() != 0) :
                     move  = str(i+1) + "B"
-                    board._playTurn(move, turnId, playing)
+                    isValid = board._playTurn(move, turnId, playing)
+                    if not isValid:
+                        return -1000
  
                     best = max( best, minimax(board,
                                               depth + 1,
@@ -65,7 +73,11 @@ def minimax(startingBoard, depth, isMax, turnId, playing) :
             for i in range(1, 15, 2) :
                 if (board.board[i]._get_redSeeds() != 0) :
                     move  = str(i+1) + "R"
-                    board._playTurn(move, turnId, playing)
+
+                    isValid = board._playTurn(move, turnId, playing)
+                    if not isValid:
+                        return -1000
+                    
  
                     best = max( best, minimax(board,
                                               depth + 1,
@@ -74,7 +86,9 @@ def minimax(startingBoard, depth, isMax, turnId, playing) :
                     board = copy.copy(startingBoard)
                 if (board.board[i]._get_blueSeeds() != 0) :
                     move  = str(i+1) + "B"
-                    board._playTurn(move, turnId, playing)
+                    isValid = board._playTurn(move, turnId, playing)
+                    if not isValid:
+                        return -1000
  
                     best = max(best, minimax(board,
                                               depth + 1,
@@ -150,6 +164,7 @@ def getTurn(startingBoard, playing, turnId):
                 board._playTurn(move, turnId, playing)
                 board = copy.copy(startingBoard)
                 moveVal = minimax(board, 0, False, turnId, playing)
+                print("MOVE : " + move + " " + str(moveVal))
                 if (moveVal > bestVal) :               
                     bestMove = move
                     bestVal = moveVal
