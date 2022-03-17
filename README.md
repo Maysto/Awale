@@ -1,42 +1,37 @@
 # Awale
-AI project for course on the game awale
+Projet d'IA sur le jeu Awale
 
 # Rules 
-There are 16 holes, 8 per player
-Holes are number from 1 to 16. We turn clockwise: Hole 1 follows clockwise hole 16. 
-The first player has the odd holes, the second player has the even holes.
-(Be careful this is quite different from the oware)
+Il y a 16 trous, 8 par joueur Les trous sont numérotés de 1 à 16. On tourne dans le sens des aiguilles d'une montre : Le trou 1 suit le trou 16 dans le sens des aiguilles d'une montre. Le premier joueur a les trous impairs, le deuxième joueur a les trous pairs.
 
-There are two colors: red and blue
-At the beginning there are 2 seeds of each color per hole
+Il y a deux couleurs : rouge et bleu Au début il y a 2 graines de chaque couleur par trou.
 
--- Object
-The game starts with 2+2 seeds in each hole. The object of the game is to capture more seeds than one's opponent. Since there is an even number of seeds, it is possible for the game to end in a draw, where each player has captured 32.
+-- Objet Le jeu commence avec 2+2 graines dans chaque trou. Le but du jeu est de capturer plus de graines que son adversaire. Comme il y a un nombre pair de graines, il est possible que le jeu se termine par un match nul, où chaque joueur a capturé 32 graines.
 
--- Sowing
-Players take turns moving the seeds. On a turn, a player chooses one of the eight holes under their control. The player removes seeds from that hole (see below for the color management), and distributes them, dropping one in holes clockwise (i.e. in non decreasing order) from this hole, in a process called sowing. 
-Moves are made according to colors. First a color is designed and all the seeds of this color are played, 
-If the seeds are red, then they are distributed in each hole. If the seeds are blue, then they are distributed only in the opponent's holes.
+-- Semis Les joueurs déplacent les graines à tour de rôle. À son tour, un joueur choisit l'un des huit trous qu'il contrôle. Le joueur retire les graines de ce trou (voir ci-dessous pour la gestion des couleurs), et les distribue, en en déposant une dans les trous dans le sens des aiguilles d'une montre (c'est-à-dire dans un ordre non décroissant) à partir de ce trou, dans un processus appelé semis. Les déplacements se font en fonction des couleurs. D'abord une couleur est désignée et toutes les graines de cette couleur sont jouées, Si les graines sont rouges, alors elles sont distribuées dans chaque trou. Si les graines sont bleues, alors elles sont distribuées uniquement dans les trous de l'adversaire.
 
-Seeds are not distributed into the hole drawn from. The starting hole is always left empty; if it contained 16 (or more) seeds, it is skipped, and the sixteenth seed is placed in the next hole. 
-Thus, a move is expressed by NC where N is the number of the hole, C is the color which is played
-For instance, 3R means that we play the red seeds of hole 3 (and only the red) 
+Les graines ne sont pas distribuées dans le trou tiré. Le trou de départ est toujours laissé vide ; s'il contenait 16 graines (ou plus), il est sauté, et la seizième graine est placée dans le trou suivant. Ainsi, un coup est exprimé par NC où N est le numéro du trou, C est la couleur qui est jouée Par exemple, 3R signifie que nous jouons les graines rouges du trou 3 (et seulement les rouges)
 
--- Capturing
-Capturing occurs only when a player brings the count of an hole to exactly two or three seeds (of any color). This always captures the seeds in the corresponding hole, and possibly more: If the previous-to-last seed also brought an hole to two or three seeeds, these are captured as well, and so on until a hole is reached which does not contain two or three seeds. The captured seeds are set aside. Starving the opponent IS ALLOWED
-Be careful, it is allowed to take the seeds from its own hole and seeds are captured independently of their colors.
-Taking all the seeds of the opponent is allowed. In case of starving all the seeds are captured by the last player.
-The game stops when there is strictly less than 8 seeds on the board. In this case, the remaining seeds are not take into account.
+-- Capture La capture ne se produit que lorsqu'un joueur porte le nombre de trous à exactement deux ou trois graines (de n'importe quelle couleur). Il capture toujours les graines du trou correspondant, et éventuellement plus : Si l'avant-dernière graine a également amené un trou à deux ou trois graines, celles-ci sont également capturées, et ainsi de suite jusqu'à ce qu'un trou ne contenant pas deux ou trois graines soit atteint. Les graines capturées sont mises de côté. Affamer l'adversaire EST PERMIS Attention, il est autorisé à prendre les graines de son propre trou et les graines sont capturées indépendamment de leurs couleurs. Prendre toutes les graines de l'adversaire est autorisé. En cas d'affamage, toutes les graines sont capturées par le dernier joueur. Le jeu s'arrête lorsqu'il y a strictement moins de 8 graines sur le plateau. Dans ce cas, les graines restantes ne sont pas prises en compte.
 
--- Winning
-The game is over when one player has captured 33 or more seeds, or each player has taken 32 seeds (draw), or there is only strictly less than 8 seeds that remain. The winner is the player who has more seeds than his opponent.
+-- Gagner La partie est terminée lorsqu'un joueur a capturé 33 graines ou plus, ou que chaque joueur a pris 32 graines (égalité), ou qu'il ne reste que strictement moins de 8 graines. Le gagnant est le joueur qui a plus de graines que son adversaire.
 
-# How to launch project
-First clone the project on you computer
+# Lancement du projet
+Tout d'abord ouvrez le zip et dézipper le projet
+Ensuite lancer cette commande dans le terminal à la racine du projet : 
 ```
 python3 .\src\main.py
 ```
-The programe ask you if you want to start the game if you say yes the bot will play as player 2 else the bot will play as player 1.
+# Les fonctionnalités
 
-our eval function check if the bank of your agent is more full than the oponent, and if our agent holes avec more seeds than the oponent if both are satisfied it return +2 score
-if only one is satisfied it return +1 if none is satisfied it return -1 if it's perfect equality it return 0
+Plusieurs fonctionnalités ont été effectués lors du projet : 
+- L'implémentation des règles pour le "Sowing", "Capture".
+- Jeu fonctionnel à 100%.
+- Implémentation d'une IA (min-max).
+- Affichage couleur des tours de jeu.
+
+# Difficultés rencontrés
+
+Nos principaux difficultés ont été sur deux points précis :
+-La fonction harvest qui parle de la capture, elle a été difficile à implémenter car on devait gérer le fait qu on devait repartir à la fin du plateau lorsqu on était dans le premier trou. 
+-Difficulté de passer de la théorie min-max à l'implémentation de l'algorithme min max 
